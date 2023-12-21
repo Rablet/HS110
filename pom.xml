@@ -7,7 +7,7 @@
 
     <groupId>dev.rablet</groupId>
     <artifactId>hs110</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A library for reading data from a TPLink HS110 smart plug</description>
@@ -57,11 +57,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
