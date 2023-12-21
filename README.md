@@ -2,6 +2,10 @@
 
 Library for reading a TPLink HS110 Smart Plug
 
+## Notes
+
+The JUnit test is currently hardcoded to test using a plug with hostname "hs110airpurifier". I will make this a config later on but for now you just need to change it in HS110Test.java
+
 ## Example Usage:
 
 Include as a dependency in pom.xml (or equivalent if not using maven):
@@ -9,7 +13,7 @@ Include as a dependency in pom.xml (or equivalent if not using maven):
     <dependency>
         <groupId>dev.rablet</groupId>
         <artifactId>hs110</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2</version>
     </dependency>
 
 Import in your class:
