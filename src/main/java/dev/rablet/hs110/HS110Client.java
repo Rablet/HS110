@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 import com.google.gson.Gson;
 
 import dev.rablet.hs110.model.Realtime;
+import dev.rablet.hs110.model.RelayState;
 import dev.rablet.hs110.model.Response;
 import dev.rablet.hs110.model.SysInfo;
 
@@ -148,6 +149,57 @@ public class HS110Client {
             LOG.debug("Parsed object from get_sysinfo response: {}", system);
         }
         return system.getSystem().getSysinfo();
+    }
+
+    /**
+     * Changes the power state of the plug.
+     * 
+     * @param turnOn true = turn the plug on, false = turn the pug off
+     * @return RelayState with the response from the plug
+     * @throws IOException
+     */
+    private RelayState changePowerOnState(boolean turnOn) throws IOException {
+
+        int state = turnOn ? 1 : 0;
+
+        String command = """
+                {
+                    "system": {
+                      "set_relay_state": {"state": $state}
+                    }
+                  }""".replace("$state", state + "");
+        String decryptedResponse = sendCommand(command);
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Decrypted response to set_relay_state={} command: {}", state, decryptedResponse);
+        }
+        Gson gson = new Gson();
+
+        Response system = gson.fromJson(decryptedResponse, Response.class);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Parsed object from set_relay_state={} response: {}", state, system);
+        }
+        return system.getSystem().getRelayState();
+    }
+
+    /**
+     * Turns the plug on
+     * 
+     * @return the system info (?? tbd)
+     * @throws IOException
+     */
+    public RelayState turnOn() throws IOException {
+        return changePowerOnState(true);
+    }
+
+    /**
+     * Turns the plug off
+     * 
+     * @return the system info (?? tbd)
+     * @throws IOException
+     */
+    public RelayState turnOff() throws IOException {
+        return changePowerOnState(false);
     }
 
     /**

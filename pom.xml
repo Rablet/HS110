@@ -7,7 +7,7 @@
 
     <groupId>dev.rablet</groupId>
     <artifactId>hs110</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A library for reading data from a TPLink HS110 smart plug</description>

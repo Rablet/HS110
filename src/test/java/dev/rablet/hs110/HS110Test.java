@@ -1,13 +1,16 @@
 package dev.rablet.hs110;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
 import dev.rablet.hs110.model.Realtime;
+import dev.rablet.hs110.model.RelayState;
 import dev.rablet.hs110.model.SysInfo;
 
 public class HS110Test {
@@ -35,5 +38,25 @@ public class HS110Test {
 
         assertNotNull(rt.getDeviceId());
         assertNotNull(rt.getHwVer());
+    }
+
+    @Test
+    public void testHS110TurnOn() throws IOException {
+
+        HS110Client client = new HS110Client("hs110airpurifier");
+
+        RelayState rs = client.turnOn();
+
+        assertEquals(0, rs.getErrCode());
+    }
+
+    @Test
+    public void testHS110TurnOff() throws IOException {
+
+        HS110Client client = new HS110Client("hs110airpurifier");
+
+        RelayState rs = client.turnOff();
+
+        assertEquals(0, rs.getErrCode());
     }
 }
